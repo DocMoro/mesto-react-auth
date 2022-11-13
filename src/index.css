@@ -54,7 +54,9 @@
 @import url(./blocks/auth/__input/auth__input.css);
 @import url(./blocks/auth/__input-error/auth__input-error.css);
 @import url(./blocks/auth/__button/auth__button.css);
+@import url(./blocks/auth/__button/_login/auth__button_login.css);
 @import url(./blocks/auth/__link/auth__link.css);
 @import url(./blocks/popup/__auth-container/__auth-container.css);
 @import url(./blocks/popup/__auth-image/popup__auth-image.css);
 @import url(./blocks/popup/__auth-title/popup__auth-title.css);
+@import url(./blocks/header/__link/header__link.css);

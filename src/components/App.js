@@ -11,6 +11,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
+import Login from './Login';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function App() {
@@ -110,7 +111,7 @@ export default function App() {
             <Register/>
           </Route>
           <Route path="/sign-in">
-
+            <Login/>
           </Route>
           <Route path="/">
             <Main 
