@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -102,16 +103,18 @@ export default function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Main 
-          onEditProfile={handleEditProfileClick} 
-          onAddPlace={handleAddPlaceClick} 
-          onEditAvatar={handleEditAvatarClick} 
-          onCardClick={handleCardClick} 
-          cards={cards} 
-          onCardLike={handleCardLike} 
-          onCardDelete={handleCardDelete}
-        />
-        <Footer />
+        <Route path="/">
+          <Main 
+            onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            onCardClick={handleCardClick} 
+            cards={cards} 
+            onCardLike={handleCardLike} 
+            onCardDelete={handleCardDelete}
+          />
+          <Footer />
+        </Route>
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
