@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
-import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
@@ -12,6 +11,7 @@ import api from '../utils/Api';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import Login from './Login';
+import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function App() {
@@ -23,6 +23,8 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState({name: '', about: '', avatar: '#'});
 
   const [cards, setCards] = useState([]);
+
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -107,23 +109,31 @@ export default function App() {
       <div className="page">
         <Header />
         <Switch>
+          <ProtectedRoute
+            exact
+            path="/"
+            loggedIn={loggedIn}
+            onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            onCardClick={handleCardClick} 
+            cards={cards} 
+            onCardLike={handleCardLike} 
+            onCardDelete={handleCardDelete}
+            component={Main}
+          />
           <Route path="/sign-up">
             <Register/>
           </Route>
           <Route path="/sign-in">
             <Login/>
           </Route>
-          <Route path="/">
-            <Main 
-              onEditProfile={handleEditProfileClick} 
-              onAddPlace={handleAddPlaceClick} 
-              onEditAvatar={handleEditAvatarClick} 
-              onCardClick={handleCardClick} 
-              cards={cards} 
-              onCardLike={handleCardLike} 
-              onCardDelete={handleCardDelete}
-            />
-            <Footer />
+          <Route>
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Redirect to="/sign-in" />
+            )}
           </Route>
         </Switch>
         <EditProfilePopup 
