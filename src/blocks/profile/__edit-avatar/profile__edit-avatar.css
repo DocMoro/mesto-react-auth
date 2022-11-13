@@ -1,0 +1,6 @@
+.profile__edit-avatar {
+  background-image: url(../../../images/edit.svg);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}

@@ -1,0 +1,18 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
+  grid-template-areas: 
+  "name button"
+  "about-me .";
+  row-gap: 16px;
+  column-gap: 18px;
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 710px) {
+  .profile__info {
+    margin-left: 28px;
+    row-gap: 4px; /*Я попытался подобрать размер с помощью Perfect Pixel, т.к. в макете он отображается некоректно*/
+    column-gap: 10px;
+  }
+}

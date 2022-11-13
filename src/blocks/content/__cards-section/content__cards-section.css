@@ -1,0 +1,9 @@
+.content__cards-section {
+  margin-top: 51px;
+}
+
+@media screen and (max-width: 710px) {
+  .content__cards-section {
+    margin-top: 36px;
+  }
+}

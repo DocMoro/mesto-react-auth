@@ -1,0 +1,16 @@
+.popup__avatar-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  max-height: 23px;
+  margin: 0 0 54px 0;
+}
+
+@media screen and (max-width: 526px) {
+  .popup__avatar-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

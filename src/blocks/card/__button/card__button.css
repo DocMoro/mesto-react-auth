@@ -1,0 +1,10 @@
+.card__button {
+  padding: 0;
+  border: none;
+  width: 22px;
+  height: 19px;
+  background: transparent;
+  background-image: url(../../../images/heart.svg);
+  background-size: cover;
+  background-position: center;
+}

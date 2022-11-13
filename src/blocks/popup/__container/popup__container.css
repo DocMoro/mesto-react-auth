@@ -1,0 +1,18 @@
+.popup__container {
+  position: fixed;
+  top: calc(50vh - 165px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 430px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #FFF;
+}
+
+@media screen and (max-width: 526px) {
+  .popup__container {
+    top: calc(50vh - 161px);
+    width: calc(100vw - 38px);
+  }
+}

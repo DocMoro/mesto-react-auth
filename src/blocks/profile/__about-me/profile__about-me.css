@@ -1,0 +1,29 @@
+.profile__about-me {
+  grid-area: about-me;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFF;
+  margin: 0;
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 710px) {
+  .profile__about-me {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .profile__about-me {
+    max-width: 190px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

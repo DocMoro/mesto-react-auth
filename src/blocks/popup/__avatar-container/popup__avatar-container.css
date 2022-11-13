@@ -1,0 +1,17 @@
+.popup__avatar-container {
+  position: fixed;
+  top: calc(50vh - 136px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 430px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #FFF;
+}
+
+@media screen and (max-width: 526px) {
+  .popup__avatar-container {
+    width: calc(100vw - 38px);
+  }
+}
