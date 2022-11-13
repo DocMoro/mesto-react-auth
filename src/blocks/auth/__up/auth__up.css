@@ -1,0 +1,4 @@
+.auth__up {
+  display: flex;
+  flex-direction: column;
+}

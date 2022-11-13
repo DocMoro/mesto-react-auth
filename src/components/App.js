@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -9,6 +9,8 @@ import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
+import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function App() {
@@ -103,18 +105,26 @@ export default function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Route path="/">
-          <Main 
-            onEditProfile={handleEditProfileClick} 
-            onAddPlace={handleAddPlaceClick} 
-            onEditAvatar={handleEditAvatarClick} 
-            onCardClick={handleCardClick} 
-            cards={cards} 
-            onCardLike={handleCardLike} 
-            onCardDelete={handleCardDelete}
-          />
-          <Footer />
-        </Route>
+        <Switch>
+          <Route path="/sign-up">
+            <Register/>
+          </Route>
+          <Route path="/sign-in">
+
+          </Route>
+          <Route path="/">
+            <Main 
+              onEditProfile={handleEditProfileClick} 
+              onAddPlace={handleAddPlaceClick} 
+              onEditAvatar={handleEditAvatarClick} 
+              onCardClick={handleCardClick} 
+              cards={cards} 
+              onCardLike={handleCardLike} 
+              onCardDelete={handleCardDelete}
+            />
+            <Footer />
+          </Route>
+        </Switch>
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
@@ -139,6 +149,7 @@ export default function App() {
           title="Вы уверены?" 
           buttonText="Удалить"
         />
+        {/*<InfoTooltip/>*/}
       </div>
     </CurrentUserContext.Provider>
   );

@@ -1,0 +1,16 @@
+.auth__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 15px 0 80px 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 418px) {
+  .auth__link {
+    margin: 20px 0 40px 0;
+  }
+}

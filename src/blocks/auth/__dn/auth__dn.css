@@ -1,0 +1,4 @@
+.auth__dn {
+  display: flex;
+  flex-direction: column;
+}
