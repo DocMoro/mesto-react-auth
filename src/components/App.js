@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
@@ -24,7 +24,7 @@ export default function App() {
 
   const [cards, setCards] = useState([]);
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -107,7 +107,6 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
         <Switch>
           <ProtectedRoute
             exact
@@ -123,9 +122,15 @@ export default function App() {
             component={Main}
           />
           <Route path="/sign-up">
+            <Header>
+              <Link to="/sign-in" className="header__link">Вход</Link>
+            </Header>
             <Register/>
           </Route>
           <Route path="/sign-in">
+            <Header>
+              <Link to="/sign-up" className="header__link">Регистрация</Link>
+            </Header>
             <Login/>
           </Route>
           <Route>

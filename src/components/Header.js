@@ -1,12 +1,11 @@
 import logo from '../images/logo.svg';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({children}) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип место" />
-      <Link to="/sign-up" className="header__link">Регистрация</Link>
+      {children}
     </header>
   )
 }

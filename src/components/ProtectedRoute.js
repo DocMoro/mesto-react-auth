@@ -1,11 +1,15 @@
 import Footer from "./Footer";
-import { Route, Redirect } from "react-router-dom";
+import Header from "./Header";
+import { Route, Redirect, Link } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
   return (
     <Route>
       {props.loggedIn ? (
         <>
+          <Header>
+            <Link to="/sign-in" className="header__link">Выход</Link>
+          </Header>
           <Component {...props} /> 
           <Footer />
         </> 
