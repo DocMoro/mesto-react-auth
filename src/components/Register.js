@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function Register({cbRegister}) {
+export default function Register({loggedIn, cbRegister}) {
   const [data, setData] = useState({
     password: '',
     email: ''
@@ -23,6 +23,10 @@ export default function Register({cbRegister}) {
       password: '',
       email: ''
     });
+  }
+
+  if (loggedIn) {
+    return <Redirect to="/"/>;
   }
 
   return (

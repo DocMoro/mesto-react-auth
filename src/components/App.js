@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import { Route, Switch, Redirect, Link, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
@@ -43,6 +43,9 @@ export default function App() {
         console.log(res.data._id);
         console.log(res.data.email);
         setLoggedIn(true);
+      })
+      .then(() => {
+        console.log(loggedIn);
       })
       .catch(err => console.log(err));
   }
@@ -139,7 +142,7 @@ export default function App() {
             <Header>
               <Link to="/sign-in" className="header__link">Вход</Link>
             </Header>
-            <Register cbRegister={cbRegister}/>
+            <Register cbRegister={cbRegister} loggedIn={loggedIn}/>
           </Route>
           <Route path="/sign-in">
             <Header>
