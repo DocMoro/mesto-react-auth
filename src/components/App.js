@@ -19,6 +19,7 @@ export default function App() {
   const [isEditProfilePopupOpen, setEditProfileClick] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [isRegisterPopup, setRegisterPopup] = useState(false);
   const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
 
   const [currentUser, setCurrentUser] = useState({name: '', about: '', avatar: '#'});
@@ -44,10 +45,10 @@ export default function App() {
         console.log(res.data.email);
         setLoggedIn(true);
       })
-      .then(() => {
-        console.log(loggedIn);
-      })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => {
+        handleRegister();
+      });
   }
 
   function handleCardLike(card) {
@@ -85,10 +86,15 @@ export default function App() {
     setSelectedCard(card);
   }
 
+  function handleRegister() {
+    setRegisterPopup(!isRegisterPopup);
+  }
+
   function closeAllPopups() {
     setEditProfileClick(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setRegisterPopup(false);
     setSelectedCard({name: '', link: ''});
   }
 
@@ -182,7 +188,11 @@ export default function App() {
           title="Вы уверены?" 
           buttonText="Удалить"
         />
-        {/*<InfoTooltip/>*/}
+        <InfoTooltip
+          isRegisterPopup={isRegisterPopup}
+          loggedIn={loggedIn}
+          onClose={closeAllPopups}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
