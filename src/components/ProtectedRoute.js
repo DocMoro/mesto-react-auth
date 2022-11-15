@@ -8,7 +8,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
       {props.loggedIn ? (
         <>
           <Header>
-            <Link to="/sign-in" className="header__link">Выход</Link>
+            {props.children}
           </Header>
           <Component {...props} /> 
           <Footer />

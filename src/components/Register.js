@@ -1,15 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-export default function Register() {
+export default function Register({cbRegister}) {
+  const [data, setData] = useState({
+    password: '',
+    email: ''
+  });
+
+  function handleChange(e) {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  
+    cbRegister(data);
+    setData({
+      password: '',
+      email: ''
+    });
+  }
+
   return (
     <div className="auth">
-      <form name="register-form" className="auth__form">
+      <form name="register-form" className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__up">
           <h2 className="auth__title">Регистрация</h2>
-          <input name="registerEmail" type="email" className="auth__input" placeholder="Email" required />
+          <input name="email" type="email" className="auth__input" placeholder="Email" value={data.email} onChange={handleChange} required />
           <span className="auth__input-error registerEmail-error"></span>
-          <input name="registerPassword" type="password" className="auth__input" placeholder="Пароль" required />
+          <input name="password" type="password" className="auth__input" placeholder="Пароль" value={data.password} onChange={handleChange} required />
           <span className="auth__input-error registerPassword-error"></span>
         </div>
         <div className="auth__dn">

@@ -13,6 +13,7 @@ import InfoTooltip from './InfoTooltip';
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import * as auth from '../utils/auth';
 
 export default function App() {
   const [isEditProfilePopupOpen, setEditProfileClick] = useState(false);
@@ -34,6 +35,17 @@ export default function App() {
       })
       .catch(err => console.log(err));
   }, []);
+
+  function cbRegister(data) {
+    auth.register(data)
+      .then(res => {
+        console.log(res);
+        console.log(res.data._id);
+        console.log(res.data.email);
+        setLoggedIn(true);
+      })
+      .catch(err => console.log(err));
+  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -120,12 +132,14 @@ export default function App() {
             onCardLike={handleCardLike} 
             onCardDelete={handleCardDelete}
             component={Main}
-          />
+          >
+            <Link to="/sign-in" className="header__link">Выход</Link>
+          </ProtectedRoute>
           <Route path="/sign-up">
             <Header>
               <Link to="/sign-in" className="header__link">Вход</Link>
             </Header>
-            <Register/>
+            <Register cbRegister={cbRegister}/>
           </Route>
           <Route path="/sign-in">
             <Header>
