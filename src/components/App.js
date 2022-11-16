@@ -27,6 +27,8 @@ export default function App() {
   const [cards, setCards] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const [email, setEmail] = useState('');
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function App() {
     auth.authorize(data)
       .then(res => {
         localStorage.setItem('token', res.token);
-        setLoggedIn(true);
+        tokenCheck(res.token);
       })
       .catch(err => console.log(err));
   }
@@ -51,7 +53,7 @@ export default function App() {
     auth.register(data)
       .then(res => {
         setEmail(res.data.email);
-        setLoggedIn(true);
+        cbLogin(data);
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -138,46 +140,71 @@ export default function App() {
     setLoggedIn(false);
   }
 
+  function tokenCheck(token) {
+    if(token) {
+      auth.getContent(token)
+        .then(res => {
+          setEmail(res.email);
+          setLoggedIn(true);
+        })
+        .catch(err => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    tokenCheck(token);
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Switch>
-          <ProtectedRoute
-            exact
-            path="/"
-            loggedIn={loggedIn}
-            onEditProfile={handleEditProfileClick} 
-            onAddPlace={handleAddPlaceClick} 
-            onEditAvatar={handleEditAvatarClick} 
-            onCardClick={handleCardClick} 
-            cards={cards} 
-            onCardLike={handleCardLike} 
-            onCardDelete={handleCardDelete}
-            component={Main}
-          >
-            <p className="header__email">{email}</p>
-            <Link to="/sign-in" className="link header__link" onClick={handleExitClick}>Выход</Link>
-          </ProtectedRoute>
-          <Route path="/sign-up">
-            <Header>
-              <Link to="/sign-in" className="link header__link">Вход</Link>
-            </Header>
-            <Register cbRegister={cbRegister} loggedIn={loggedIn}/>
-          </Route>
-          <Route path="/sign-in">
-            <Header>
-              <Link to="/sign-up" className="link header__link">Регистрация</Link>
-            </Header>
-            <Login cbLogin={cbLogin} loggedIn={loggedIn}/>
-          </Route>
-          <Route>
-            {loggedIn ? (
-              <Redirect to="/" />
-            ) : (
-              <Redirect to="/sign-in" />
-            )}
-          </Route>
-        </Switch>
+        {
+          loading 
+          ? <h1 style={{color: "#fff", margin: "calc(50vh - 18px) 0 0 0"}}>...Loading</h1>
+          : <Switch>
+              <ProtectedRoute
+                exact
+                path="/"
+                loggedIn={loggedIn}
+                onEditProfile={handleEditProfileClick} 
+                onAddPlace={handleAddPlaceClick} 
+                onEditAvatar={handleEditAvatarClick} 
+                onCardClick={handleCardClick} 
+                cards={cards} 
+                onCardLike={handleCardLike} 
+                onCardDelete={handleCardDelete}
+                component={Main}
+              >
+                <p className="header__email">{email}</p>
+                <Link to="/sign-in" className="link header__link" onClick={handleExitClick}>Выход</Link>
+              </ProtectedRoute>
+              <Route path="/sign-up">
+                <Header>
+                  <Link to="/sign-in" className="link header__link">Вход</Link>
+                </Header>
+                <Register cbRegister={cbRegister} loggedIn={loggedIn}/>
+              </Route>
+              <Route path="/sign-in">
+                <Header>
+                  <Link to="/sign-up" className="link header__link">Регистрация</Link>
+                </Header>
+                <Login cbLogin={cbLogin} loggedIn={loggedIn}/>
+              </Route>
+              <Route>
+                {loggedIn ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Redirect to="/sign-in" />
+                )}
+              </Route>
+            </Switch>
+        }
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
