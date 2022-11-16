@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default function Login({loggedIn, cbLogin}) {
   const [data, setData] = useState({
@@ -7,7 +8,7 @@ export default function Login({loggedIn, cbLogin}) {
   });
 
   function handleChange(e) {
-    const [name, value] = e.target;
+    const {name, value} = e.target;
     setData({
       ...data,
       [name]: value

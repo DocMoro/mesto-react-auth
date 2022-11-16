@@ -1,4 +1,4 @@
-import  accept from '../images/accept.svg';
+import accept from '../images/accept.svg';
 import fail from '../images/accept.svg';
 
 export default function InfoTooltip({isRegisterPopup, loggedIn, onClose}) {

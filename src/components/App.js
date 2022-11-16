@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, Link, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
@@ -41,7 +41,7 @@ export default function App() {
   function cbLogin(data) {
     auth.authorize(data)
       .then(res => {
-        localStorage.setItem('jwt', res.jwt);
+        localStorage.setItem('token', res.token);
         setLoggedIn(true);
       })
       .catch(err => console.log(err));
@@ -133,6 +133,11 @@ export default function App() {
       .catch(err => console.log(err));
   }
 
+  function handleExitClick() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -151,7 +156,7 @@ export default function App() {
             component={Main}
           >
             <p className="header__email">{email}</p>
-            <Link to="/sign-in" className="link header__link">Выход</Link>
+            <Link to="/sign-in" className="link header__link" onClick={handleExitClick}>Выход</Link>
           </ProtectedRoute>
           <Route path="/sign-up">
             <Header>

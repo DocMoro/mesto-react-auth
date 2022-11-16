@@ -9,7 +9,7 @@ export default function Register({loggedIn, cbRegister}) {
   });
 
   function handleChange(e) {
-    const [name, value] = e.target;
+    const {name, value} = e.target;
     setData({
       ...data,
       [name]: value
