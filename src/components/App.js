@@ -38,6 +38,15 @@ export default function App() {
       .catch(err => console.log(err));
   }, []);
 
+  function cbLogin(data) {
+    auth.authorize(data)
+      .then(res => {
+        localStorage.setItem('jwt', res.jwt);
+        setLoggedIn(true);
+      })
+      .catch(err => console.log(err));
+  }
+
   function cbRegister(data) {
     auth.register(data)
       .then(res => {
@@ -154,7 +163,7 @@ export default function App() {
             <Header>
               <Link to="/sign-up" className="link header__link">Регистрация</Link>
             </Header>
-            <Login/>
+            <Login cbLogin={cbLogin} loggedIn={loggedIn}/>
           </Route>
           <Route>
             {loggedIn ? (

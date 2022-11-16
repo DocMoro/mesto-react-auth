@@ -9,9 +9,10 @@ export default function Register({loggedIn, cbRegister}) {
   });
 
   function handleChange(e) {
+    const [name, value] = e.target;
     setData({
       ...data,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   }
 

@@ -1,22 +1,36 @@
 import { useState } from 'react';
 
-export default function Login() {
+export default function Login({loggedIn, cbLogin}) {
   const [data, setData] = useState({
     password: '',
     email: ''
   });
 
-  function handleChange(evt) {
-    console.log(data);
+  function handleChange(e) {
+    const [name, value] = e.target;
     setData({
       ...data,
-      [evt.target.name]: evt.target.value
+      [name]: value
     });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  
+    cbLogin(data);
+    setData({
+      password: '',
+      email: ''
+    });
+  }
+
+  if (loggedIn) {
+    return <Redirect to="/"/>;
   }
 
   return (
     <div className="auth">
-      <form name="login-form" className="auth__form">
+      <form name="login-form" className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__up">
           <h2 className="auth__title">Вход</h2>
           <input name="email" type="email" className="auth__input" placeholder="Email" value={data.email} onChange={handleChange} required />
