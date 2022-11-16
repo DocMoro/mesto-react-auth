@@ -41,7 +41,7 @@ export default function Register({loggedIn, cbRegister}) {
         </div>
         <div className="auth__dn">
           <button type="submit" className="auth__button">Зарегестрироваться</button>
-          <Link to="/sign-in" className="auth__link button">Ужу зарегестрированы? Войти</Link>
+          <Link to="/sign-in" className="link auth__link">Ужу зарегестрированы? Войти</Link>
         </div>
       </form>
     </div>

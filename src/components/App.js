@@ -141,18 +141,18 @@ export default function App() {
             onCardDelete={handleCardDelete}
             component={Main}
           >
-            <p className="header__container">{email}</p>
-            <Link to="/sign-in" className="header__link">Выход</Link>
+            <p className="header__email">{email}</p>
+            <Link to="/sign-in" className="link header__link">Выход</Link>
           </ProtectedRoute>
           <Route path="/sign-up">
             <Header>
-              <Link to="/sign-in" className="header__link">Вход</Link>
+              <Link to="/sign-in" className="link header__link">Вход</Link>
             </Header>
             <Register cbRegister={cbRegister} loggedIn={loggedIn}/>
           </Route>
           <Route path="/sign-in">
             <Header>
-              <Link to="/sign-up" className="header__link">Регистрация</Link>
+              <Link to="/sign-up" className="link header__link">Регистрация</Link>
             </Header>
             <Login/>
           </Route>
