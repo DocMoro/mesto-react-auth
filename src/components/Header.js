@@ -5,7 +5,9 @@ export default function Header({children}) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип место" />
-      {children}
+      <div className="header__container">
+        {children}
+      </div>
     </header>
   )
 }

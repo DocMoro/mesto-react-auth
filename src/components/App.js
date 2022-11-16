@@ -27,6 +27,7 @@ export default function App() {
   const [cards, setCards] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -40,9 +41,7 @@ export default function App() {
   function cbRegister(data) {
     auth.register(data)
       .then(res => {
-        console.log(res);
-        console.log(res.data._id);
-        console.log(res.data.email);
+        setEmail(res.data.email);
         setLoggedIn(true);
       })
       .catch(err => console.log(err))
@@ -142,6 +141,7 @@ export default function App() {
             onCardDelete={handleCardDelete}
             component={Main}
           >
+            <p className="header__container">{email}</p>
             <Link to="/sign-in" className="header__link">Выход</Link>
           </ProtectedRoute>
           <Route path="/sign-up">
