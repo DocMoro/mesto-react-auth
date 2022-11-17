@@ -142,6 +142,7 @@ export default function App() {
   function handleExitClick() {
     localStorage.removeItem('token');
     setLoggedIn(false);
+    setEmail('');
   }
 
   function tokenCheck(token) {
@@ -171,43 +172,38 @@ export default function App() {
         {
           loading 
           ? <h1 className="loader page__loader">...Loading</h1>
-          : <Switch>
-              <ProtectedRoute
-                exact
-                path="/"
-                loggedIn={loggedIn}
-                onEditProfile={handleEditProfileClick} 
-                onAddPlace={handleAddPlaceClick} 
-                onEditAvatar={handleEditAvatarClick} 
-                onCardClick={handleCardClick} 
-                cards={cards} 
-                onCardLike={handleCardLike} 
-                onCardDelete={handleCardDelete}
-                component={Main}
-              >
-                <p className="header__email">{email}</p>
-                <Link to="/sign-in" className="link header__link" onClick={handleExitClick}>Выход</Link>
-              </ProtectedRoute>
-              <Route path="/sign-up">
-                <Header>
-                  <Link to="/sign-in" className="link header__link">Вход</Link>
-                </Header>
-                <Register cbRegister={cbRegister} loggedIn={loggedIn}/>
-              </Route>
-              <Route path="/sign-in">
-                <Header>
-                  <Link to="/sign-up" className="link header__link">Регистрация</Link>
-                </Header>
-                <Login cbLogin={cbLogin} loggedIn={loggedIn}/>
-              </Route>
-              <Route>
-                {loggedIn ? (
-                  <Redirect to="/" />
-                ) : (
-                  <Redirect to="/sign-in" />
-                )}
-              </Route>
-            </Switch>
+          : <>
+              <Header email={email} handleExitClick={handleExitClick} />
+              <Switch>
+                <ProtectedRoute
+                  exact
+                  path="/"
+                  loggedIn={loggedIn}
+                  onEditProfile={handleEditProfileClick} 
+                  onAddPlace={handleAddPlaceClick} 
+                  onEditAvatar={handleEditAvatarClick} 
+                  onCardClick={handleCardClick} 
+                  cards={cards} 
+                  onCardLike={handleCardLike} 
+                  onCardDelete={handleCardDelete}
+                  component={Main}
+                />
+                <Route path="/sign-up">
+                  <Register cbRegister={cbRegister} loggedIn={loggedIn} />
+                </Route>
+                <Route path="/sign-in">
+                  <Login cbLogin={cbLogin} loggedIn={loggedIn} />
+                </Route>
+                <Route>
+                  {loggedIn ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Redirect to="/sign-in" />
+                  )}
+                </Route>
+              </Switch>
+              {loggedIn && <Footer />}
+            </>
         }
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
