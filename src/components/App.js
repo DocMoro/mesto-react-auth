@@ -7,7 +7,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
-import api from '../utils/Api';
+import api from '../utils/api';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import Login from './Login';
@@ -32,13 +32,15 @@ export default function App() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([dataUser, dataCards])  => {
-        setCurrentUser(dataUser);
-        setCards(dataCards.slice(0, 21));
-      })
-      .catch(err => console.log(err));
-  }, []);
+    if(loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([dataUser, dataCards])  => {
+          setCurrentUser(dataUser);
+          setCards(dataCards.slice(0, 21));
+        })
+        .catch(err => console.log(err));
+    }
+  }, [loggedIn]);
 
   function cbLogin(data) {
     auth.authorize(data)
@@ -51,8 +53,7 @@ export default function App() {
 
   function cbRegister(data) {
     auth.register(data)
-      .then(res => {
-        setEmail(res.data.email);
+      .then(() => {
         cbLogin(data);
       })
       .catch(err => console.log(err))
