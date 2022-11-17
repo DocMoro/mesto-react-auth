@@ -149,7 +149,7 @@ export default function App() {
     if(token) {
       auth.getContent(token)
         .then(res => {
-          setEmail(res.email);
+          setEmail(res.data.email);
           setLoggedIn(true);
         })
         .catch(err => console.log(err))
