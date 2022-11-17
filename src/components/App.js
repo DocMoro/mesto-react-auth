@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from './Header';
 import Main from './Main';
@@ -8,9 +8,8 @@ import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
-import Register from './Register';
 import InfoTooltip from './InfoTooltip';
-import Login from './Login';
+import AuthForm from './AuthForm';
 import ProtectedRoute from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -189,10 +188,10 @@ export default function App() {
                   component={Main}
                 />
                 <Route path="/sign-up">
-                  <Register cbRegister={cbRegister} loggedIn={loggedIn} />
+                  <AuthForm callback={cbRegister} loggedIn={loggedIn} register={true} />
                 </Route>
                 <Route path="/sign-in">
-                  <Login cbLogin={cbLogin} loggedIn={loggedIn} />
+                  <AuthForm callback={cbLogin} loggedIn={loggedIn} register={false} />
                 </Route>
                 <Route>
                   {loggedIn ? (

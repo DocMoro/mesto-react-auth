@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-export default function Login({loggedIn, cbLogin}) {
+export default function Register({loggedIn, callback, register}) {
   const [data, setData] = useState({
     password: '',
     email: ''
@@ -18,7 +18,7 @@ export default function Login({loggedIn, cbLogin}) {
   function handleSubmit(e) {
     e.preventDefault();
   
-    cbLogin(data);
+    callback(data);
     setData({
       password: '',
       email: ''
@@ -31,16 +31,17 @@ export default function Login({loggedIn, cbLogin}) {
 
   return (
     <div className="auth">
-      <form name="login-form" className="auth__form" onSubmit={handleSubmit}>
+      <form name="register-form" className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__up">
-          <h2 className="auth__title">Вход</h2>
+          <h2 className="auth__title">{register ? 'Регистрация' : 'Вход'}</h2>
           <input name="email" type="email" className="auth__input" placeholder="Email" value={data.email} onChange={handleChange} required />
-          <span className="auth__input-error loginEmail-error"></span>
+          <span className="auth__input-error registerEmail-error"></span>
           <input name="password" type="password" className="auth__input" placeholder="Пароль" value={data.password} onChange={handleChange} required />
-          <span className="auth__input-error loginPassword-error"></span>
+          <span className="auth__input-error registerPassword-error"></span>
         </div>
         <div className="auth__dn">
-          <button type="submit" className="auth__button auth__button_login">Войти</button>
+          <button type="submit" className={`auth__button ${!register && "auth__button_login"}`}>{register ? 'Зарегестрироваться' : 'Войти'}</button>
+          {register && <Link to="/sign-in" className="link auth__link">Ужу зарегестрированы? Войти</Link>}
         </div>
       </form>
     </div>
