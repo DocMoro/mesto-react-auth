@@ -170,7 +170,7 @@ export default function App() {
       <div className="page">
         {
           loading 
-          ? <h1 style={{color: "#fff", margin: "calc(50vh - 18px) 0 0 0"}}>...Loading</h1>
+          ? <h1 className="loader page__loader">...Loading</h1>
           : <Switch>
               <ProtectedRoute
                 exact
