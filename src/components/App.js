@@ -57,7 +57,7 @@ export default function App() {
   function cbRegister(data) {
     auth.register(data)
       .then(() => {
-        cbLogin(data);
+        
       })
       .catch(err => console.log(err))
       .finally(() => {
