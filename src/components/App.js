@@ -10,6 +10,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import InfoTooltip from './InfoTooltip';
 import AuthForm from './AuthForm';
+import Footer from './Footer';
 import ProtectedRoute from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
