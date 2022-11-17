@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-export default function Register({loggedIn, callback, register}) {
+export default function AuthForm({loggedIn, callback, register}) {
   const [data, setData] = useState({
     password: '',
     email: ''
