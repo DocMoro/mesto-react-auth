@@ -31,6 +31,7 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [registerIn, setRegisterIn] = useState(false);
 
   const [email, setEmail] = useState('');
 
@@ -57,9 +58,12 @@ export default function App() {
   function cbRegister(data) {
     auth.register(data)
       .then(() => {
-        
+        setRegisterIn(true);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setRegisterIn(false);
+        console.log(err);
+      })
       .finally(() => {
         handleRegister();
       });
@@ -231,7 +235,7 @@ export default function App() {
         />
         <InfoTooltip
           isRegisterPopup={isRegisterPopup}
-          loggedIn={loggedIn}
+          registerIn={registerIn}
           onClose={closeAllPopups}
         />
       </div>
