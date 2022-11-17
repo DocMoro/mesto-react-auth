@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 export default function Register({loggedIn, cbRegister}) {
   const [data, setData] = useState({

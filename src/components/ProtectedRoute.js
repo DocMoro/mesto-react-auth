@@ -1,6 +1,6 @@
-import Footer from "./Footer";
-import Header from "./Header";
 import { Route, Redirect } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
   return (

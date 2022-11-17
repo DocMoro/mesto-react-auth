@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ImagePopup({onClose, card}) {
   const {link, name} = card;
 

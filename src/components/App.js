@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
+
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
@@ -7,12 +8,14 @@ import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
-import api from '../utils/api';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
+
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+import api from '../utils/api';
 import * as auth from '../utils/auth';
 
 export default function App() {
